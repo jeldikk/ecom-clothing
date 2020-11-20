@@ -4,6 +4,7 @@ import './App.css';
 import {Switch, Route, Link} from 'react-router-dom'
 
 import HomePage from "./pages/homepage/homepage.component"
+import ShopPage from "./pages/shop/shop.component"
 
 // const HomePage = (props)=>{
 //   console.log(props);
@@ -38,22 +39,20 @@ import HomePage from "./pages/homepage/homepage.component"
 //   )
 // }
 
-const HatsPage = ()=>{
-  return(
-    <div>
-      <h1>HATS PAGE</h1>
-    </div>
-  ) 
-}
+// const HatsPage = ()=>{
+//   return(
+//     <div>
+//       <h1>HATS PAGE</h1>
+//     </div>
+//   ) 
+// }
 
 function App() {
   return (
     <div>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        {/* <Route exact path="/topics" component={TopicsList} />
-        <Route path="/topics/:topicId" component={TopicDetail} /> */}
-        <Route path="/hats" component={HatsPage} />
+        <Route path="/shop" component={ShopPage} />
       </Switch>
       
     </div>
