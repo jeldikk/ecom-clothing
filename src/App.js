@@ -5,61 +5,58 @@ import {Switch, Route, Link} from 'react-router-dom'
 
 import HomePage from "./pages/homepage/homepage.component"
 import ShopPage from "./pages/shop/shop.component"
+import SignInAndSignOut from "./pages/sign-in-and-sign-up/sing-in-and-sign-up.component"
 
 import Header from "./components/header/header.component"
 
-// const HomePage = (props)=>{
-//   console.log(props);
+import {auth} from "./firebase/firebase.utils"
 
-//   return (
-//     <div>
-//       <Link to="/topics">Topics Page</Link>
-//       <button onClick={()=>props.history.push('/topics/23')}>23 topic</button>
-//       <button onClick={()=> props.history.push("/topics/24")}> 24 topic</button>
-//       <button onClick={()=> props.history.push("/topics/25")}>25 topic</button>
-//       <h1>HOME PAGE</h1>
-//     </div>
-//   )
-// }
+class App extends React.Component {
 
-// const TopicsList = (props)=>{
-//   console.log(props)
-//   return (
-//     <div>
-//       <h1>TOPICS LIST PAGE</h1>
-//     </div>
-//   )
-// }
+  constructor(props){
+    super(props);
 
-// const TopicDetail = (props)=>{
+    this.unsubscribeFromAuth = null;
+    this.state = {
+      currentUser: null
+    }
+  }
 
-//   console.log(props);
-//   return (
-//     <div>
-//       <h1>TOPIC DETAIL PAGE: {props.match.params.topicId}</h1>
-//     </div>
-//   )
-// }
+  componentDidMount(){
 
-// const HatsPage = ()=>{
-//   return(
-//     <div>
-//       <h1>HATS PAGE</h1>
-//     </div>
-//   ) 
-// }
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({currentUser: user});
 
-function App() {
-  return (
-    <div>
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/shop" component={ShopPage} />
-      </Switch>
-      
-    </div>
-  );
+      // console.log(user)
+      console.log('On Auth State Change', user.displayName);
+      // console.log(user.displayName)
+    })
+
+    // console.log(this.unsubscribeFromAuth)
+
+
+  }
+
+  componentWillUnmount(){
+    console.log("Will unmount called")
+    this.unsubscribeFromAuth();
+  }
+
+  render(){
+
+    return (
+      <div>
+        <Header currentUser={this.state.currentUser}/>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/signin" component={SignInAndSignOut} />
+        </Switch>
+        
+      </div>
+    );
+  }
+  
 }
 
 export default App;
