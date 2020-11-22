@@ -44,6 +44,9 @@ class App extends React.Component {
 
   componentWillUnmount(){
     console.log("Will unmount called")
+    if(!this.unsubscribeFromAuth){
+      return
+    }
     this.unsubscribeFromAuth();
   }
 
