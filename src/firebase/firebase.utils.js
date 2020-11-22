@@ -33,7 +33,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         console.log("got null authentication token")
         return
     }
-    // else{
+    else{
 
         // console.log(firestore.doc('users/125sdsilanlkn'))
         let userRef = _firestore.doc(`users/${userAuth.uid}`);
@@ -41,10 +41,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
         try{
             let snapShot = await userRef.get();
-            console.log('snapshot is',snapShot);
-            console.log('snapshot metadata is ', snapShot.metadata)
-            console.log('snapshot exits',snapShot.exists);
-            console.log('snapshot data ', snapShot.data());
+            // console.log('snapshot is',snapShot);
+            // console.log('snapshot metadata is ', snapShot.metadata)
+            // console.log('snapshot exits',snapShot.exists);
+            // console.log('snapshot data ', snapShot.data());
             
             // console.log('snapshot data family', snapShot.data().family)
 
@@ -74,7 +74,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
         return userRef;
 
-    // }
+    }
 }
 
 const provider = new firebase.auth.GoogleAuthProvider();

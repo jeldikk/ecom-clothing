@@ -14,15 +14,35 @@ class SignIn extends React.Component {
     this.state = {
       email: "",
       password: "",
+      error: ""
     };
   }
 
   handleSubmit = async (event) => {
-    event.preventDefault();
-    const {email, password} = this.state;
-    const {user} = await auth.signInWithEmailAndPassword(email, password);
 
-    console.log(user)
+    event.preventDefault();
+
+    const {email, password} = this.state;
+    
+    try{
+      const {user} = await auth.signInWithEmailAndPassword(email, password);
+    }
+    catch(error){
+
+      const {code, message} = error;
+      console.log(code);
+      console.log(message)
+
+      // if(code === 'auth/wrong-password'){
+      //   this.setState({error: message})
+      // }
+      this.setState({error: message})
+      return
+
+    }
+    
+
+    // console.log(user)
 
     this.setState({ email: "", password: "" });
   };
@@ -40,7 +60,9 @@ class SignIn extends React.Component {
       <div className="sign-in">
         <h1 className="title">I already have an account</h1>
         <span>Sign in with your email and password</span>
-
+        <div className="error">
+          {this.state.error}
+        </div>
         <form onSubmit={this.handleSubmit}>
 
           <FormInput handleChange={this.handleOnChange} label='EMAIL' name='email' type="email" value={this.state.email} required/>
