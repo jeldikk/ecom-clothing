@@ -9,7 +9,7 @@ import SignInAndSignOut from "./pages/sign-in-and-sign-up/sing-in-and-sign-up.co
 
 import Header from "./components/header/header.component"
 
-import {auth} from "./firebase/firebase.utils"
+import {auth, createUserProfileDocument} from "./firebase/firebase.utils"
 
 class App extends React.Component {
 
@@ -24,12 +24,17 @@ class App extends React.Component {
 
   componentDidMount(){
 
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({currentUser: user});
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      // this.setState({currentUser: user});
 
-      // console.log(user)
-      console.log('On Auth State Change', user.displayName);
+      // console.log(user);
+      // console.log('On Auth State Change', user.displayName);
       // console.log(user.displayName)
+      // console.log(user)
+      console.log('On Auth State Changed');
+      await createUserProfileDocument(user);
+      // console.log('on auth state change ',user);
+      this.setState({currentUser: user});
     })
 
     // console.log(this.unsubscribeFromAuth)

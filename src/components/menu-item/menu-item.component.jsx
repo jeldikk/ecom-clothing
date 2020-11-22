@@ -8,7 +8,7 @@ const MenuItem = ({title, imageUrl, size, linkUrl, history, match})=>{
 
     // console.log(history);
     // console.log(location);
-    console.log(match);
+    // console.log(match);
 
     return (
         <div className={size ? `${size} menu-item` : 'menu-item'} onClick={()=>history.push(`${match.url}${linkUrl}`)}>
