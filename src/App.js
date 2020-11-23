@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css';
 
-import {Switch, Route, Link} from 'react-router-dom'
+import {Switch, Route, Link, Redirect} from 'react-router-dom'
 import {connect} from "react-redux"
 
 import HomePage from "./pages/homepage/homepage.component"
@@ -14,7 +14,7 @@ import {auth, createUserProfileDocument} from "./firebase/firebase.utils"
 
 import {setCurrentUser} from "./redux/user/user.actions"
 
-class App extends React.Component {
+class App extends React.Component{
 
   constructor(props){
     super(props);
@@ -69,13 +69,20 @@ class App extends React.Component {
 
   render(){
 
+    // let {curUser} = this.props.currentUser;
+    // console.log('curUser in App render',curUser)
+    console.log('this.props in render',this.props)
+    
+
     return (
       <div>
         <Header/>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/shop" component={ShopPage} />
-          <Route path="/signin" component={SignInAndSignOut} />
+          {/* <Route path="/signin" component={SignInAndSignOut} /> */}
+          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignInAndSignOut />) } />
+          
         </Switch>
         
       </div>
@@ -83,6 +90,14 @@ class App extends React.Component {
   }
   
 }
+
+const mapStateToProps = (state) => {
+  // console.log("mstp in app.js ", state)
+  return {
+    currentUser: state.user.currentUser
+  }
+}
+
 
 const mapDispatchToProps = (dispatch) => {
 
@@ -92,4 +107,4 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

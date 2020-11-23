@@ -75,6 +75,7 @@ export default class SignUp extends React.Component {
       }
 
       if (error_code === "auth/weak-password") {
+
         this.setState({ email_error: '', password_error:message });
       }
     }
