@@ -7,6 +7,8 @@ import {connect} from "react-redux"
 import HomePage from "./pages/homepage/homepage.component"
 import ShopPage from "./pages/shop/shop.component"
 import SignInAndSignOut from "./pages/sign-in-and-sign-up/sing-in-and-sign-up.component"
+import CollectionPage from "./pages/collection-page/collection-page.component"
+
 
 import Header from "./components/header/header.component"
 
@@ -79,7 +81,8 @@ class App extends React.Component{
         <Header/>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
+          <Route exact path="/shop" component={ShopPage} />
+          <Route path="/shop/:collectionName" component={CollectionPage} />
           {/* <Route path="/signin" component={SignInAndSignOut} /> */}
           <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to="/" />) : (<SignInAndSignOut />) } />
           

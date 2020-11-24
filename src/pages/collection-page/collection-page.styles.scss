@@ -1,0 +1,17 @@
+.collection-page{
+
+    .title{
+        font-size: 30px;
+    }
+
+    .collection{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        // align-items: flex-start;
+    }
+
+    .collection-item{
+        padding: 10px;
+    }
+}
