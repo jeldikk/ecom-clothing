@@ -20,9 +20,9 @@ function CartDropdown({cartItems}) {
 }
 
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = ({cart: {cartItems}})=>{
     return {
-        cartItems: [...state.cart.cartItems]
+        cartItems
     }
 }
 
