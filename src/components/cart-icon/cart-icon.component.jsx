@@ -12,7 +12,7 @@ function CartIcon({toggleDropDown}) {
     return (
         <div className="cart-icon" onClick={toggleDropDown}>
             <ShoppingIcon className="shopping-icon" />
-            <span className="item-count">{100}</span>
+            <span className="item-count">{0}</span>
         </div>
     )
 }
