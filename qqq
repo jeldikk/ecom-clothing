@@ -1,0 +1,101 @@
+[33mcommit 0933be7b590d2418c69ca8fd29c5062c23188522[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Tue Nov 24 22:56:03 2020 +0530
+
+    updating out app with reselect replaced cart selectors with memoized selectors
+
+[33mcommit 6999a3a9aaaa3486fbcb5a9fb2e138693c9fabf2[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Tue Nov 24 14:57:53 2020 +0530
+
+    created cart-item component and connected our cart dropdown with cartItems reducer
+
+[33mcommit e2f9eb961c17cbdd4ba4a9e6db68c947d22c32c3[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Tue Nov 24 14:57:15 2020 +0530
+
+    small tweaks in the code with some patches
+
+[33mcommit d69c3c262188cd5c1c1050b1380067b372bafb25[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Tue Nov 24 14:21:28 2020 +0530
+
+    Updated shop data with new data,, updated cart utils to group items in cart reducer
+
+[33mcommit ba1f5374314c37927f6bf305ae3d53d6c13ca0a2[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Mon Nov 23 20:28:10 2020 +0530
+
+    cart icon addded, cartdropdown component and implemented reducer
+
+[33mcommit 8170fe2c441e298696fce8b04aa3fa4d0b19d5b4[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Mon Nov 23 19:07:33 2020 +0530
+
+    updating our app to redirect to home if user is signed in
+
+[33mcommit ebcc8b3822ec78031cdfa26e697760632a0f69e7[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Mon Nov 23 03:16:28 2020 +0530
+
+    aimintegrated redux code with react code using connect, mapStateToProps, mapDispatchToProps
+
+[33mcommit c9dc49b8b387e42ca59e31c6e6b21ec21e5495c4[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Sun Nov 22 18:19:51 2020 +0530
+
+    added reducers, actions and some tweaks, but didn't integrated redux into jsx yet
+
+[33mcommit 2c85ddb33b86eeaa1739b2ec83f75161a0ff8f99[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Sun Nov 22 14:03:10 2020 +0530
+
+    sing-in handle submit method is implemented
+
+[33mcommit 2735662ce22598fcbf5d87ce948356c3f3526279[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Sun Nov 22 13:49:27 2020 +0530
+
+    implemented firebase utils, included ability to store authenticated users into our firestore database
+
+[33mcommit 463b8a23f21ab3cf65cfca95e741fd037f145467[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Sat Nov 21 19:06:53 2020 +0530
+
+    integrated firebase into application, created sign in and singout functionality
+
+[33mcommit 6fe15e64ba6123f7452d5ee7ac28b00e7fe1ce3a[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Fri Nov 20 16:45:52 2020 +0530
+
+    Adding Header component and links to home, shop page and contact
+
+[33mcommit f77ef716f0e57cad2ab906d7b1389a2e8c4fdc9d[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Fri Nov 20 16:13:51 2020 +0530
+
+    updating our app with a shop page, collection preview component and collection item component
+
+[33mcommit 52be6f8b600b6324f06b4af387fbba2b194eebb5[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Fri Nov 20 14:49:48 2020 +0530
+
+    updated our menu-items to navigate withRouter HOC
+
+[33mcommit ed066c293b7cc149002fe1fcb09c8749ed7e2315[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Wed Nov 18 12:15:52 2020 +0530
+
+    Broken our homepage into smaller components, finished styling our menu-item component
+
+[33mcommit 455a71b1bfbe34bf7ef95e5a2ba74ce642e32543[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Mon Nov 16 14:01:13 2020 +0530
+
+    created project with cra and added files for homepage
+
+[33mcommit 7a62a58714efb828c11452fcc3f834ed670ac60e[m
+Author: jeldikk <jeldi.kamal2013@gmail.com>
+Date:   Sun Nov 15 23:15:27 2020 +0530
+
+    Initialize project using Create React App

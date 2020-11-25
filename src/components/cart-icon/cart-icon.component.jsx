@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {connect} from "react-redux"
+import {createStructuredSelector} from "reselect"
 
 import "./cart-icon.styles.scss"
 
@@ -24,10 +25,8 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        itemCount: selectCartItemsCount(state)
-    }
-}
+const mapStateToProps = createStructuredSelector({
+    itemCount: selectCartItemsCount
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

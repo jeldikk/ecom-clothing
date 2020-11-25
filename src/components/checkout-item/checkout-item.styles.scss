@@ -1,0 +1,47 @@
+.checkout-item{
+    width: 100%;
+    display: flex;
+    min-height: 50px;
+    border-bottom: 1px solid darkgrey;
+    padding: 15px 0;
+    font-size: 20px;
+    align-items: center;
+
+    .image-container{
+        width: 23%;
+        padding-right: 15px;
+
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .name, .quantity, .price{
+        width: 23%;
+    }
+
+    .quantity{
+        padding-left: 0px;
+
+        
+        .arrow{
+            padding: 5px;
+            cursor: pointer;
+
+            &.disable{
+                visibility: hidden;
+            }
+        }
+        .value{
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid gray;
+        }
+    }
+
+    .remove-button{
+        padding-left: 12px;
+        cursor: pointer;
+    }
+}
