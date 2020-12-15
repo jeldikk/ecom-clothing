@@ -10,7 +10,7 @@ import "./checkout-page.styles.scss"
 
 const CheckoutPage = ({cartItems, totalValue}) => {
 
-    console.log(cartItems);
+    // console.log(cartItems);
     return (
         <div className="checkout-page">
             <div className="checkout-header">

@@ -10,7 +10,7 @@ import "./header.styles.scss"
 
 const Header = ({currentUser, hidden})=>{
 
-    console.log("header currentUser ", currentUser);
+    // console.log("header curr?entUser ", currentUser);
 
 
     return(

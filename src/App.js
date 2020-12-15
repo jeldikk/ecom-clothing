@@ -18,7 +18,7 @@ import {auth, createUserProfileDocument} from "./firebase/firebase.utils"
 import {setCurrentUser} from "./redux/user/user.actions"
 import {selectCurrentUser} from "./redux/user/user.selectors"
 
-class App extends React.Component{
+export class App extends React.Component{
 
   constructor(props){
     super(props);
@@ -75,7 +75,7 @@ class App extends React.Component{
 
     // let {curUser} = this.props.currentUser;
     // console.log('curUser in App render',curUser)
-    console.log('this.props in render',this.props)
+    // console.log('this.props in render',this.props)
     
 
     return (
@@ -111,5 +111,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 
 }
+
+// export App;
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

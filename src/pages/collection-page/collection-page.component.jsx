@@ -1,25 +1,22 @@
 import React from 'react'
 
+import {connect} from 'react-redux'
+
 import "./collection-page.styles.scss"
 
-import SHOP_DATA from "../shop/shop.data"
+import {selectCollection} from "../../redux/shop/shop.selectors"
+// import SHOP_DATA from "../../redux/shop/shop.data"
 
-import CollectionPreview from "../../components/collection-preview/collection-preview.component"
+// import CollectionPreview from "../../components/collection-preview/collection-preview.component"
 import CollectionItem from "../../components/collection-item/collection-item.component"
 
 const CollectionPage = (props) => {
-    // console.log("collection_name is ",collectionName)
-
-    let {collectionName} = props.match.params;
-    let itemListObject = SHOP_DATA.filter(itm => itm.routeName === collectionName);
-    console.log("itemListObject" ,itemListObject)
-    let {items, title} = itemListObject[0];
-    console.log(items);
-    // console.log("shop data is :", SHOP_DATA)
-    // console.log('props are ', props)
+    
+    let {items, title} = props.item
+    
     return (
         <div className="collection-page">
-            <div className="title">Showing {collectionName}</div>
+            <div className="title">Showing {title}</div>
             <div className="collection">
                 {
                     items.map(itm => <CollectionItem key={itm.id} item={itm} />)
@@ -29,4 +26,25 @@ const CollectionPage = (props) => {
     )
 }
 
-export default CollectionPage
+
+const mapStateToProps = (state, actualProps) => {
+    return {
+        item: selectCollection(actualProps.match.params.collectionName)(state)
+    }
+}
+
+/*
+line #32 is called as currying. it means splitting a multi arguments taking function to single argument taking functions
+
+for example:
+const Multiply = (a) => (b) => a*b
+
+const MultiplyBy5 = Multiply(5); // we are making a utility function called MultiplyBy5 we can use this when ever we want as shorthand
+
+so MultiplyBy5(10) will produce 50 because it is equivalent to Multiply(5)(10)
+
+These help in decrease in the decrease of amount of work to be done by computer since, the functions are already calculated before.
+
+*/
+
+export default connect(mapStateToProps,null)(CollectionPage)

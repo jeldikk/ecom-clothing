@@ -8,7 +8,7 @@ import {removeItem, setItemQuantity} from "../../redux/cart/cart.actions"
 const CheckoutItem = ({cartItem, removeItem, setItemQuantity})=>{
 
     const {name, imageUrl, quantity, price} = cartItem;
-    console.log("checkout item for ", cartItem.id, 'rendered');
+    // console.log("checkout item for ", cartItem.id, 'rendered');
     return (
         <div className="checkout-item">
             <div className="image-container">
