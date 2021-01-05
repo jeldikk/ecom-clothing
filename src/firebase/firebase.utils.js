@@ -28,6 +28,11 @@ let _firestore = firebase.firestore();
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 
+    // let userCollecRef = _firestore.collection('users');
+    // let userCollecSnapshot = await userCollecRef.get();
+    // console.log({collection: userCollecSnapshot.docs.map(snapshot => snapshot.data())});
+    
+
     // console.log(userAuth);
     if(!userAuth){
         console.log("got null authentication token")
@@ -40,7 +45,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         // let familyRef = _firestore.doc('families/1lSsLA7H9hzDAMammFbV')
 
         try{
-            let snapShot = await userRef.get();
+            let snapShot = await userRef.get(); // this will return a promise
             // console.log('snapshot is',snapShot);
             // console.log('snapshot metadata is ', snapShot.metadata)
             // console.log('snapshot exits',snapShot.exists);
@@ -75,6 +80,53 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         return userRef;
 
     }
+}
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    console.log(collectionKey, objectsToAdd);
+    const collectionRef = _firestore.collection(collectionKey);
+    console.log({collectionRef: collectionRef})
+    // console.log(collectionRef.exists)
+    // if(collectionRef.exists){
+    //     console.log("collection already exists");
+    //     return;
+    // }
+    // else{
+        const batch = _firestore.batch();
+        
+        for(const key in objectsToAdd){
+            const docRef = collectionRef.doc();
+            const {title, items, routeName} = objectsToAdd[key];
+            batch.set(docRef, {title, items, routeName})
+            // batch.set(docRef, objectsToAdd[key])
+        }
+
+        return await batch.commit()
+    // }
+
+}
+
+export const convertCollectionSnapshotToMap = (collections) => {
+
+    const transformedCollection = collections.docs.map((doc) => {
+        const {title, items, routeName} = doc.data();
+
+        return {
+            routeName,
+            id: doc.id,
+            title,
+            items
+        }
+    });
+
+    // console.log(transformedCollection)
+    // return transformedCollection;
+    // The below snippet is example of how to convert a Array of objects into bigger object with keys
+    // this is done because this is how we used to develop application with keybased data file
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator;
+    },{})
 }
 
 const provider = new firebase.auth.GoogleAuthProvider();

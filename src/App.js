@@ -13,10 +13,11 @@ import CheckoutPage from "./pages/checkout-page/checkout-page.component"
 
 import Header from "./components/header/header.component"
 
-import {auth, createUserProfileDocument} from "./firebase/firebase.utils"
+import {auth, createUserProfileDocument, addCollectionAndDocuments} from "./firebase/firebase.utils"
 
 import {setCurrentUser} from "./redux/user/user.actions"
 import {selectCurrentUser} from "./redux/user/user.selectors"
+import {selectCollections} from "./redux/shop/shop.selectors"
 
 export class App extends React.Component{
 
@@ -51,11 +52,12 @@ export class App extends React.Component{
             }
           });
 
-        })
+        }, err => console.error("Error when There is no connection"), () => console.log('onSnapshot callback is executed'))
       }
       
       
-      setCurrentUser({currentUser: userAuth})
+      setCurrentUser({currentUser: userAuth});
+      // addCollectionAndDocuments('collections', collections);
     })
 
     // console.log(this.unsubscribeFromAuth)
@@ -83,8 +85,8 @@ export class App extends React.Component{
         <Header/>
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
-          <Route path="/shop/:collectionName" component={CollectionPage} />
+          <Route path="/shop" component={ShopPage} />
+          {/* <Route path="/shop/:collectionName" component={CollectionPage} /> */}
 
           <Route exact path="/checkout" component={CheckoutPage} />
           {/* <Route path="/signin" component={SignInAndSignOut} /> */}
@@ -100,7 +102,7 @@ export class App extends React.Component{
 
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 })
 
 
