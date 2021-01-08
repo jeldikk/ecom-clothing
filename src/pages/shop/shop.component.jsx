@@ -5,8 +5,9 @@ import { createStructuredSelector } from "reselect";
 import "./shop.styles.scss";
 
 // import SHOP_DATA from "../../redux/shop/shop.data"
-import { selectCollections } from "../../redux/shop/shop.selectors";
-import { setShopDataCollection } from "../../redux/shop/shop.actions";
+import { selectCollections, selectIsCollectionFetching } from "../../redux/shop/shop.selectors";
+// import { setShopDataCollection } from "../../redux/shop/shop.actions";
+import {fetchCollectionStartAsync} from "../../redux/shop/shop.actions"
 import CollectionPreview from "../../components/collection-preview/collection-preview.component";
 import CollectionPage from "../collection-page/collection-page.component";
 
@@ -30,11 +31,14 @@ class ShopPage extends React.Component {
     
   }
 
-  unsubscribeFromSnapshot = null;
+  // unsubscribeFromSnapshot = null;
 
   componentDidMount() {
-    let collectionRef = firestore.collection("collections");
+    // let collectionRef = firestore.collection("collections");
     console.log("This is in shop component did mount method");
+
+    // the below snippet shows on using redux-thunk to do asynchronous execution
+    this.props.fetchCollectionStartAsync();
 
     // the below shows on how to use firebase using observable/observer pattern. 
     // onSnapShot is a subscription function on how to work with values pushed by firebase
@@ -59,19 +63,19 @@ class ShopPage extends React.Component {
     //this is how we leverage promise pattern to get data from firebase
     // but the problem with using such pattern is, we can get updated data when it changes in firebase 
 
-    collectionRef.get()
-        .then((snapshot) => {
-          const collectionMap = convertCollectionSnapshotToMap(snapshot);
-          console.log("This snapshot is from promises pattern");
-          this.props.setShopData(collectionMap);
-          this.setState({loading: false});
-        })
-        .catch((error)=>{
-          console.log("Error occured while fetching data")
-        })
-        .finally(()=>{
-          console.log("At the end of getting data using promise method")
-        })
+    // collectionRef.get()
+    //     .then((snapshot) => {
+    //       const collectionMap = convertCollectionSnapshotToMap(snapshot);
+    //       console.log("This snapshot is from promises pattern");
+    //       this.props.setShopData(collectionMap);
+    //       this.setState({loading: false});
+    //     })
+    //     .catch((error)=>{
+    //       console.log("Error occured while fetching data")
+    //     })
+    //     .finally(()=>{
+    //       console.log("At the end of getting data using promise method")
+    //     })
     // ***
 
 
@@ -94,6 +98,7 @@ class ShopPage extends React.Component {
     let keylist = Object.keys(this.props.collections);
 
     // console.log(this.props); // this.props.match.path is /shop
+    const {isCollectionFetching} = this.props;
 
     return (
       <div className="shop-page">
@@ -106,7 +111,7 @@ class ShopPage extends React.Component {
               keylist.map((key) => (
                 //   <CollectionPreview key={key} {...this.props.collections[key]} />
                 <CollectionPreviewWithSpinner key={key}
-                  isLoading={this.state.loading}
+                  isLoading={isCollectionFetching}
                   {...this.props.collections[key]}
                 />
               ))
@@ -118,7 +123,7 @@ class ShopPage extends React.Component {
             path={`${this.props.match.path}/:collectionName`}
             render={(props) => (
               <CollectionPageWithSpinner
-                isLoading={this.state.loading}
+                isLoading={isCollectionFetching}
                 {...props}
               />
             )}
@@ -138,13 +143,18 @@ class ShopPage extends React.Component {
 //     }
 // }
 
+// const mapStateToProps = createStructuredSelector({
+//   collections: selectCollections,
+// });
+
 const mapStateToProps = createStructuredSelector({
   collections: selectCollections,
-});
+  isCollectionFetching: selectIsCollectionFetching
+})
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setShopData: (data) => dispatch(setShopDataCollection(data)),
+    fetchCollectionStartAsync: () => dispatch(fetchCollectionStartAsync())
   };
 };
 
